@@ -41,8 +41,12 @@ body{
 }
 .cardDescription{
     padding: 5px;
-    /* font-family: Playball; */
     font-size: 25px
+}
+.cardPrice{
+    color: #996D59 !important ; 
+    font-size: 25px;
+    text-align: center;
 }
 .teddieImage{
     align-self: flex-start;
@@ -61,12 +65,10 @@ body{
     align-items: flex-end;
 }
 .chooseColor{
-    /* font-family: Playball; */
     font-size: 20px
 }
 .selectColor{
     width: 150px;
-    /* font-family: Playball; */
     font-size: 20px
 }
 .priceButtonContainer{
@@ -76,7 +78,6 @@ body{
     text-decoration: none !important;
 }
 .priceButton{
-    /* font-family: Playball; */
     color: #996D59 !important ; 
     background-color: lightgray;
     border-radius: 20px;

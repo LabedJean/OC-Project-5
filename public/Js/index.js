@@ -1,6 +1,6 @@
 const APIurl = "http://localhost:3000/api/teddies"; // URL de l'API
 const container = document.querySelector(".container");
-
+// localStorage.clear()
 // Récupère les produits
 const fetchProducts = async () => {
   try {
@@ -25,7 +25,7 @@ fetchProducts().then(data => {
         <div class="card-body">
           <a href="../public/product.html?_id=${teddie._id}" class="text-dark text-decoration-none"><h3 class="card-title stretched-link">${teddie.name}</h3></a>
           <p class="card-text">${teddie.description}</p>
-          <p class="btn priceButton  mb-0">${teddie.price}</p>
+          <p class="btn priceButton  mb-0">${teddie.price} €</p>
         </div>
       </div>
     </div>

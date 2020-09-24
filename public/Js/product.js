@@ -30,11 +30,12 @@ fetchProduct().then(teddie => {
             <div class="leftContainer">
                 <p class="card-text cardDescription">${teddie.description}</p>
                 <div class="form-group colorGroup m-0">
-                <p class="chooseColor">Choose your color : </p>
+                    <p class="chooseColor">Choose your color : </p>
                     <select class="form-control selectColor">${teddie.colors.map((color) => `<option>${color}</option>`)}</select>
                 </div>
-                <a class="priceButtonContainer">
-                    <button class="btn priceButton mt-2 w-10">Ajouter au panier</button>
+                <p class="card-text cardPrice">${teddie.price} €</p>
+                <a href="cart.html" class="priceButtonContainer">
+                    <button class="btn priceButton mt-2 w-10 add-to-cart">Ajouter au panier</button>
                 </a>
             </div>
             
@@ -42,4 +43,11 @@ fetchProduct().then(teddie => {
     </div>
 
   `;
+
+  const addToCart = document.querySelector(".add-to-cart"); // Cible le bouton 
+    addToCart.addEventListener("click", () => {
+    const cartContent = JSON.parse(localStorage.getItem("cartContent")) || []; // Récupère les données du localStorage sous forme d'array sinon crée un array vide
+    cartContent.push(id); // Ajoute un produit à l'array
+    localStorage.setItem("cartContent", JSON.stringify(cartContent)); // Enregistre l'array dans le localStorage sous forme de string
+  });
 });
