@@ -19,6 +19,7 @@ const fetchProduct = async () => {
 };
 
 fetchProduct().then(teddie => {
+  const formatter = new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" });
   // Crée et ajoute un template
   container.innerHTML += `
 
@@ -33,9 +34,9 @@ fetchProduct().then(teddie => {
                     <p class="chooseColor">Choose your color : </p>
                     <select class="form-control selectColor">${teddie.colors.map((color) => `<option>${color}</option>`)}</select>
                 </div>
-                <p class="card-text cardPrice">${teddie.price} €</p>
+                <p class="card-text cardPrice">${formatter.format(teddie.price / 100)}</p>
                 <a href="cart.html" class="priceButtonContainer">
-                    <button class="btn priceButton mt-2 w-10 add-to-cart">Ajouter au panier</button>
+                    <button class="btn priceButton mt-2 w-10 add-to-cart">Add to cart</button>
                 </a>
             </div>
             

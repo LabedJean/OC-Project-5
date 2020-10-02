@@ -23,6 +23,20 @@ body{
 .ourProducts{
     font-size: 30px;
 }
+/* NAV */
+.navBar{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    -webkit-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.75);
+box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.75);
+}
+.narBarBrand{
+    margin-right: 24vw;
+    font-size: 30px;
+}
+
 .card-header{
     text-align: center;
     font-size: 35px;
@@ -35,6 +49,9 @@ body{
     align-items: center;
 }
 
+.pageTitle{
+    margin-left: 15vw;
+}
 /* PRODUCTS */
 .leftContainer{
     padding:10px
@@ -83,4 +100,42 @@ body{
     border-radius: 20px;
     width: 30vw;
     font-size: 25px;
+}
+
+/* CART */
+.tableCart{
+    text-align: center; 
+    border : 1px #996D59 solid;
+    margin-bottom: 30px;
+}
+.imageInTable{
+    width: 10vw;
+    height: auto;
+}
+.tableHead{
+    width: 12vw !important;
+}
+.emptyCartContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+.emptyCartButton{
+    color: #996D59 !important ; 
+    background-color: lightgray;
+    border-radius: 20px;
+    width: 18vw;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+.price{
+    text-align: end;
+}
+.deleteButton{
+    color: #996D59 !important ; 
+    background-color: lightgray;
+    border-radius: 20px;
+    width: 10vw;
+    font-size: 15px;
+    border: 1px black solid;
 }

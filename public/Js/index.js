@@ -1,6 +1,6 @@
 const APIurl = "http://localhost:3000/api/teddies"; // URL de l'API
 const container = document.querySelector(".container");
-// localStorage.clear()
+
 // Récupère les produits
 const fetchProducts = async () => {
   try {
@@ -17,6 +17,7 @@ const fetchProducts = async () => {
 
 // Utilise les données de l'array JSON récupéré
 fetchProducts().then(data => {
+  const formatter = new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" });
   // Crée un template pour chaque élément de l'array
   const teddies = data.map(teddie => `
     <div class="col-sm-6 text-center mb-4">
@@ -25,7 +26,7 @@ fetchProducts().then(data => {
         <div class="card-body">
           <a href="../public/product.html?_id=${teddie._id}" class="text-dark text-decoration-none"><h3 class="card-title stretched-link">${teddie.name}</h3></a>
           <p class="card-text">${teddie.description}</p>
-          <p class="btn priceButton  mb-0">${teddie.price} €</p>
+          <p class="btn priceButton  mb-0">${formatter.format(teddie.price / 100)}</p>
         </div>
       </div>
     </div>
