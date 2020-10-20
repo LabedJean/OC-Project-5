@@ -31,12 +31,12 @@ fetchProduct().then(teddie => {
             <div class="leftContainer">
                 <p class="card-text cardDescription">${teddie.description}</p>
                 <div class="form-group colorGroup m-0">
-                    <p class="chooseColor">Choose your color : </p>
+                    <p class="chooseColor">Choisissez la couleur : </p>
                     <select class="form-control selectColor">${teddie.colors.map((color) => `<option>${color}</option>`)}</select>
                 </div>
                 <p class="card-text cardPrice">${formatter.format(teddie.price / 100)}</p>
                 <a href="cart.html" class="priceButtonContainer">
-                    <button class="btn priceButton mt-2 w-10 add-to-cart">Add to cart</button>
+                    <button class="btn priceButton mt-2 w-10 add-to-cart">Ajouter au panierp</button>
                 </a>
             </div>
             

@@ -107,6 +107,7 @@ box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.75);
     text-align: center; 
     border : 1px #996D59 solid;
     margin-bottom: 30px;
+    border-radius: 10px;
 }
 .imageInTable{
     width: 10vw;
@@ -131,6 +132,9 @@ box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.75);
 .price{
     text-align: end;
 }
+.nameInList{
+    color: black !important;
+}
 .deleteButton{
     color: #996D59 !important ; 
     background-color: lightgray;
@@ -138,4 +142,10 @@ box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.75);
     width: 10vw;
     font-size: 15px;
     border: 1px black solid;
+}
+.validation-form{
+    display: flex;
+    flex-direction: column;
+    width: 35vw;
+    margin-left: 20vw;
 }

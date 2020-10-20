@@ -22,7 +22,7 @@ fetchProducts().then(data => {
   const teddies = data.map(teddie => `
     <div class="col-sm-6 text-center mb-4">
       <div class="card">
-        <img class="card-img-top" src="${teddie.imageUrl}" alt="Appareil photo ${teddie.name}">
+        <img class="card-img-top" src="${teddie.imageUrl}" alt="Ours en peluche ${teddie.name}">
         <div class="card-body">
           <a href="../public/product.html?_id=${teddie._id}" class="text-dark text-decoration-none"><h3 class="card-title stretched-link">${teddie.name}</h3></a>
           <p class="card-text">${teddie.description}</p>

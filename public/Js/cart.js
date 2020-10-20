@@ -1,4 +1,5 @@
 const APIurl = "http://localhost:3000/api/teddies";
+const urlPost = "http://localhost:3000/api/teddies/order"; // URL de l'API pour la requête POST
 const container = document.querySelector(".container"); 
 
 // Récupère les produits
@@ -28,13 +29,12 @@ fetchProducts().then(data => {
       const cartItems = cartContent.map(itemId => {
         const cartItem = data.find(item => item._id === itemId); // Renvoie les détails d'un produit si son id correspond à l'id sauvegardé
         priceCount += cartItem.price; // Incrémente le compteur du prix de chaque produit
-        console.log(cartItem)
         return `
           <tr>
           <td><img class="imageInTable" src="${cartItem.imageUrl}" alt=""></td>
             <th scope="row">
               <i ></i>
-              <a href="product.html?_id:${cartItem._id}">${cartItem.name}
+              <a class="nameInList" href="product.html?_id:${cartItem._id}">${cartItem.name}
             </th>
             <td>${formatter.format(cartItem.price / 100)}</td>
             <td>${cartItem.description}</td>
@@ -47,7 +47,7 @@ fetchProducts().then(data => {
       // Crée et ajoute un template qui contient le template crée précédemment
       container.innerHTML += `
       <div class="emptyCartContainer">
-        <button class="btn emptyCartButton mt-2 w-10 empty-your-cart">Empty your cart</button>
+        <button class="btn emptyCartButton mt-2 w-10 empty-your-cart">Vider votre panier</button>
       </div>
         <table class="tableCart">
           <thead>
@@ -64,7 +64,17 @@ fetchProducts().then(data => {
       `;
 
     container.innerHTML += `<p class="price"> Total : ${formatter.format(priceCount / 100)} </p>`; // Ajoute le prix total à la balise ciblée
-
+    
+    container.innerHTML += `
+    <form class="mt-5 validation-form">
+      <input type="text" class="form-control mb-2" id="firstName" placeholder="Prénom" pattern="^[-'a-zA-ZÀ-ÖØ-öø-ÿ ]{2,30}$" title="2 à 30 lettres, sans accents ni caractères spéciaux." required>
+      <input type="text" class="form-control mb-2" id="lastName" placeholder="Nom de famille" pattern="^[-'a-zA-ZÀ-ÖØ-öø-ÿ ]{2,30}$" title="2 à 30 lettres, sans accents ni caractères spéciaux." required>
+      <input type="text" class="form-control mb-2" id="address" placeholder="Adresse" required>
+      <input type="text" class="form-control mb-2" id="city" placeholder="Ville" pattern="^[-'a-zA-ZÀ-ÖØ-öø-ÿ ]{2,30}$" required>
+      <input type="email" class="form-control mb-4" id="email" placeholder="Adresse électronique" required>
+      <button type="submit" class="btn btn-success w-100">Valider le panier</button>
+    </form>
+  `;
   }
 
 const addToCart = document.querySelector(".empty-your-cart"); // Cible le bouton 
@@ -79,7 +89,6 @@ const addToCart = document.querySelector(".empty-your-cart"); // Cible le bouton
 
   // Au clic sur l'icône de suppression
   cart.addEventListener("click", event => {
-    console.log(event.target.classList, ' event.target.classList')
     if (event.target.classList.contains("deleteButton")) {
       console.log('enter')
       const targetTr = event.target.parentElement.parentElement; // Cible la ligne du tableau qui contient l'icône ciblée
@@ -96,4 +105,49 @@ const addToCart = document.querySelector(".empty-your-cart"); // Cible le bouton
       }
     }
   });
+
+   // Envoie le formulaire de contact et la liste des produits
+   const form = document.querySelector(".validation-form"); // Cible le formulaire
+   const { firstName, lastName, address, city, email } = form; // Déstructure les éléments du formulaire
+
+  form.addEventListener("submit", event => {
+    event.preventDefault();
+    // Envoie la commande
+    const postProducts = async () => {
+      try {
+        const response = await fetch(urlPost, {
+          method: "POST",
+          headers: new Headers({
+            "Content-Type": "application/json",
+          }),
+          body: JSON.stringify({
+            contact: {
+              firstName: firstName.value.trim(),
+              lastName: lastName.value.trim(),
+              address: address.value.trim(),
+              city: city.value.trim(),
+              email: email.value.trim(),
+            },
+            products: cartContent,
+          }),
+        });
+        return await response.json(); // Renvoie la réponse du serveur en JSON
+      } catch (error) {
+        container.innerHTML += `<p class="h5 text-center font-weight-bold text-danger mt-4">Un problème est survenu lors de la transmission de votre commande.</p>`;
+        return console.log(error);
+      }
+    };
+
+    // Utilise les données renvoyées par le serveur
+    postProducts().then((orderData) => {
+      localStorage.clear(); // Remet à zéro le localStorage
+      localStorage.setItem("orderData", JSON.stringify(orderData)); // Enregistre les informations de la commande dans le localStorage
+      localStorage.setItem("orderPrice", formatter.format(priceCount / 100));
+      if (localStorage.getItem("orderData") !== "undefined") {
+        window.location.href = "confirmation.html"; // Redirige vers la page de confirmation
+      }
+    });
+  });
+
+  
 });
