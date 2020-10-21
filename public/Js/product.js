@@ -36,7 +36,7 @@ fetchProduct().then(teddie => {
                 </div>
                 <p class="card-text cardPrice">${formatter.format(teddie.price / 100)}</p>
                 <a href="cart.html" class="priceButtonContainer">
-                    <button class="btn priceButton mt-2 w-10 add-to-cart">Ajouter au panierp</button>
+                    <button class="btn priceButton mt-2 w-10 add-to-cart">Ajouter au panier</button>
                 </a>
             </div>
             
