@@ -149,3 +149,12 @@ box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.75);
     width: 35vw;
     margin-left: 20vw;
 }
+
+@media only screen and (max-width: 768px) {
+    .cardContainer{
+      flex-direction: column !important;
+    }
+    .cardDescription{
+        width: 175% !important;
+    }
+  }
